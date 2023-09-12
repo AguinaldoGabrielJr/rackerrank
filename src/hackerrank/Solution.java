@@ -1,31 +1,49 @@
 package hackerrank;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class Solution {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		int q = sc.nextInt();
+		int t = sc.nextInt();
+		sc.nextLine();
 
-		for (int i = 0; i < q; i++) {
+		BigInteger n = null;
+		for (int i = 0; i < t; i++) {
 
-			int a = sc.nextInt();
-			int b = sc.nextInt();
-			int n = sc.nextInt();
+			n = sc.nextBigInteger();
 			
-			for (int j = 0; j < n; j++) {
-				a += b;
-				
-				if (j > 0) {
-					System.out.print(" ");
-				}
-				
-				System.out.print(a);
-				b = b * 2;
+			if (n.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) <= 0 
+					&& n.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0) {
+				System.out.print(n + " can be fitted in:\n");
+			}else {
+				System.out.print(n + " can't be fitted anywhere.\n");
 			}
-			System.out.print("\n");
+			
+			
+			if (n.compareTo(BigInteger.valueOf(Byte.MIN_VALUE)) >= 0
+					&& n.compareTo(BigInteger.valueOf(Byte.MAX_VALUE)) <= 0) {
+				System.out.println("* byte");
+			}
+
+			if (n.compareTo(BigInteger.valueOf(Short.MIN_VALUE)) >= 0
+					&& n.compareTo(BigInteger.valueOf(Short.MAX_VALUE)) <= 0) {
+				System.out.println("* short");
+			}
+
+			if (n.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0
+					&& n.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0) {
+				System.out.println("* int");
+			}
+
+			if (n.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0
+					&& n.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) <= 0) {
+				System.out.println("* long");
+			}
+
 		}
-		sc.close();
+
 	}
 }
