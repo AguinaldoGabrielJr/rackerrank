@@ -1,23 +1,32 @@
 package hackerrank;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Solution {
-	public static void main(String[] args) throws IOException {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) {
 
-		int num = Integer.parseInt(bufferedReader.readLine().trim());
+		Scanner sc = new Scanner(System.in);
+		int q = sc.nextInt();
 
-		double d = Double.parseDouble(bufferedReader.readLine().trim());
+		for (int i = 0; i < q; i++) {
 
-		String s = bufferedReader.readLine();
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			int n = sc.nextInt();
+			
+			for (int j = 0; j < n; j++) {
+				a += b;
+				
+				if (j > 0) {
+					System.out.print(" ");
+				}
+				
+				System.out.print(a);
+				b = b * 2;
+			}
+			System.out.print("\n");
+		}
 
-		System.out.println("String: " + s);
-		System.out.println("Double: " + d);
-		System.out.println("Int: " + num);
-
-		bufferedReader.close();
+		sc.close();
 	}
 }
