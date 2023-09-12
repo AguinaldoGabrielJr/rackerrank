@@ -26,7 +26,6 @@ public class Solution {
 			}
 			System.out.print("\n");
 		}
-
 		sc.close();
 	}
 }
