@@ -2,45 +2,33 @@ package hackerrank;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class Solution {
 
-	private static Pattern p = Pattern.compile("^ [A-Za-z !,?._'@]+");
-
-	public static boolean isAlpha(String s) {
-		return p.matcher(s).find();
-	}
-
-	private static String removeLeadingNonLetters(String str) {
-		int i;
-		for (i = 0; i < str.length(); i++) {
-			if (Character.isLetter(str.charAt(i))) {
-				break;
-			}
+	public static boolean isValidPattern(String pattern) {
+		try {
+			Pattern.compile(pattern);
+			return true;
+		} catch (PatternSyntaxException e) {
+			return false;
 		}
-		return str.substring(i);
 	}
 
 	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int testCases = Integer.parseInt(in.nextLine());
 
-		Scanner scan = new Scanner(System.in);
-		String s = scan.nextLine();
-		scan.close();
+		while (testCases > 0) {
+			String pattern = in.nextLine();
+			if (isValidPattern(pattern)) {
+				System.out.println("Valid");
+			} else {
+				System.out.println("Invalid");
+			}
 
-		boolean alpha = isAlpha(s);
-		s = removeLeadingNonLetters(s);
-		
-        if (s.length() == 0) {
-            System.out.println(0);
-            return;
-        }
-
-		String tokens[] = s.split("[!,?._'@\\s]+");
-		
-		System.out.println(tokens.length);
-		for (String token : tokens) {
-			System.out.println(token);
-
+			testCases--;
 		}
+		in.close();
 	}
 }
