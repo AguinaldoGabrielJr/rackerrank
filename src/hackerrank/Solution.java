@@ -1,27 +1,29 @@
 package hackerrank;
+
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Solution {
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        String A = sc.next();
-        String B = sc.next();
-        
-        int compareTo = A.compareTo(B);
-        int lengthA = A.length();
-        int lengthB = B.length();
-        
-        System.out.println(lengthA + lengthB);
-        if (compareTo > 0) {
-            System.out.println("Yes");
-        }else {
-            System.out.println("No");
-        }
-        
-        System.out.print(A.substring(0,1).toUpperCase()+ A.substring(1) + " ");
-        System.out.println(B.substring(0,1).toUpperCase()+ B.substring(1));
-        
-        sc.close();
-    }
+	private static Pattern p = Pattern.compile("^[a-zA-Z]*$");
+
+	public static boolean isAlpha(String s) {
+		return p.matcher(s).find();
+	}
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		String S = sc.next();
+		boolean alpha = isAlpha(S);
+		int start = sc.nextInt();
+		int end = sc.nextInt();
+
+		int length = S.length();
+
+		System.out.println(S.subSequence(start, end));
+
+		sc.close();
+
+	}
 }
