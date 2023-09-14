@@ -1,42 +1,46 @@
 package hackerrank;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Solution {
 
-	static boolean isAnagram(String a, String b) {
-		a = a.toUpperCase();
-		b = b.toUpperCase();
-		boolean ret = false;
-		StringBuilder c = new StringBuilder(b);
+	private static Pattern p = Pattern.compile("^ [A-Za-z !,?._'@]+");
 
-		if (a.length() == b.length()) {
-			for (int i = 0; i < a.length(); i++) {
-				for (int j = 0; j < c.length(); j++) {
-					if (a.charAt(i) == c.charAt(j)) {
-						c.deleteCharAt(j);
-						if (i == a.length() - 1 && c.length() == 0) {
-							ret = true;
-							break;
-						}
-						break;
+	public static boolean isAlpha(String s) {
+		return p.matcher(s).find();
+	}
 
-					}
-
-				}
+	private static String removeLeadingNonLetters(String str) {
+		int i;
+		for (i = 0; i < str.length(); i++) {
+			if (Character.isLetter(str.charAt(i))) {
+				break;
 			}
 		}
-		return ret;
-
+		return str.substring(i);
 	}
 
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
-		String a = scan.next();
-		String b = scan.next();
+		String s = scan.nextLine();
 		scan.close();
-		boolean ret = isAnagram(a, b);
-		System.out.println(ret ? "Anagrams" : "Not Anagrams");
+
+		boolean alpha = isAlpha(s);
+		s = removeLeadingNonLetters(s);
+		
+        if (s.length() == 0) {
+            System.out.println(0);
+            return;
+        }
+
+		String tokens[] = s.split("[!,?._'@\\s]+");
+		
+		System.out.println(tokens.length);
+		for (String token : tokens) {
+			System.out.println(token);
+
+		}
 	}
 }
