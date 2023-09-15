@@ -1,34 +1,28 @@
 package hackerrank;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 public class Solution {
 
-	public static boolean isValidPattern(String pattern) {
-		try {
-			Pattern.compile(pattern);
-			return true;
-		} catch (PatternSyntaxException e) {
-			return false;
-		}
-	}
-
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		int testCases = Integer.parseInt(in.nextLine());
+		Scanner scanner = new Scanner(System.in);
 
-		while (testCases > 0) {
-			String pattern = in.nextLine();
-			if (isValidPattern(pattern)) {
-				System.out.println("Valid");
-			} else {
-				System.out.println("Invalid");
+		String ipRegex = "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
+		while (scanner.hasNextLine()) {
+			String ipAddress = scanner.nextLine();
+			boolean isValid;
+			try {
+				isValid = ipAddress.matches(ipRegex);
+			} catch (Exception e) {
+				isValid = false;
 			}
 
-			testCases--;
+			if (isValid) {
+				System.out.println("true");
+			} else {
+				System.out.println("false");
+			}
 		}
-		in.close();
 	}
 }

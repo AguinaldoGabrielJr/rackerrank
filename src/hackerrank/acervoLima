@@ -1,0 +1,89 @@
+package hackerrank;
+
+import java.util.regex.*;
+
+class Solution {
+ 
+    public static boolean isValidIPAddress(String ip)
+    {
+ 
+        String zeroTo255
+            = "(\\d{1,2}|(0|1)\\"
+              + "d{2}|2[0-4]\\d|25[0-5])";
+ 
+        String regex
+            = zeroTo255 + "\\."
+              + zeroTo255 + "\\."
+              + zeroTo255 + "\\."
+              + zeroTo255;
+ 
+        Pattern p = Pattern.compile(regex);
+ 
+        if (ip == null) {
+            return false;
+        }
+ 
+        Matcher m = p.matcher(ip);
+ 
+        // Return if the IP address
+        // matched the ReGex
+        return m.matches();
+    }
+ 
+    // Driver code
+    public static void main(String args[])
+    {
+        // Checking for True case.
+        // Test Case: 1
+        System.out.println("Test Case 1:");
+        String str1 = "000.12.12.034"
+        		+ "";
+        System.out.println("Input: " + str1);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str1));
+ 
+        // Test Case: 2
+        System.out.println("\nTest Case 2:");
+        String str2 = "121.234.12.12";
+        System.out.println("Input: " + str2);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str2));
+ 
+        // Checking for False case.
+        // Test Case: 3
+        System.out.println("\nTest Case 3:");
+        String str3 = "23.45.12.56"
+        		+ "";
+        System.out.println("Input: " + str3);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str3));
+ 
+        // Test Case: 4
+        System.out.println("\nTest Case 4:");
+        String str4 = "00.12.123.123123.123";
+        System.out.println("Input: " + str4);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str4));
+        
+        // Test Case: 5
+        System.out.println("\nTest Case 5:");
+        String str5 = "122.23";
+        System.out.println("Input: " + str5);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str5));
+        
+        // Test Case: 6
+        System.out.println("\nTest Case 6:");
+        String str6 = "122.23";
+        System.out.println("Input: " + str6);
+        System.out.println(
+            "Output: "
+            + isValidIPAddress(str6));
+    }
+}
+
