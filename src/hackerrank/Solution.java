@@ -1,29 +1,31 @@
 package hackerrank;
 
 import java.util.Scanner;
-class UsernameValidator {
-
-	final static String regularExpression = "[A-Za-z][A-Za-z0-9_]{7,29}";
-	
-}
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solution {
-	
-    private static final Scanner scan = new Scanner(System.in);
-    
-    public static void main(String[] args) {
-    	System.out.println("Quantidade: ");
-        int n = Integer.parseInt(scan.nextLine());
-        while (n-- != 0) {
-        	System.out.println("name: ");
-            String userName = scan.nextLine();
+	public static void main(String[] args) {
 
-            if (userName.matches(UsernameValidator.regularExpression)) {
-                System.out.println("Valid");
-            } else {
-                System.out.println("Invalid");
-            }           
-        }
-        
-    }
+		Scanner in = new Scanner(System.in);
+		int testCases = Integer.parseInt(in.nextLine());
+
+		while (testCases > 0) {
+
+			String line = in.nextLine();
+			Pattern pattern = Pattern.compile("<([^<>/]+)>([^<>]+)</(\\1)>");
+			Matcher matcher = pattern.matcher(line);
+			if (matcher.find()) {
+				System.out.println(matcher.group(2));
+				while (matcher.find()) {
+					System.out.println(matcher.group(2));
+				}
+			} else {
+				System.out.println("None");
+			}
+			testCases--;
+
+		}
+		in.close();
+	}
 }
