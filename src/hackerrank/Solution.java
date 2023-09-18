@@ -1,44 +1,79 @@
 package hackerrank;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
-class Checker implements Comparator<Player> {
-	
-    @Override
-    public int compare(Player p1, Player p2) {
-        return p1.score == p2.score ? p1.name.compareTo(p2.name) : Integer.valueOf(p2.score).compareTo(Integer.valueOf(p1.score));
-    }
+class compareStudante implements Comparator<Student> {
+	public int compare(Student p1, Student p2) {
+		if (p1.getCgpa() > p2.getCgpa())
+			return -1;
+		else if (p1.getCgpa() < p2.getCgpa())
+			return 1;
+		else {
+			if (!p1.getFname().equals(p2.getFname()))
+				return p1.getFname().compareTo(p2.getFname());
+			else {
+				if (p2.getId() < p1.getId())
+					return 1;
+				else
+					return -1;
+			}
+		}
+	}
+
 }
 
-class Player {
-	String name;
-	int score;
+class Student {
+	private int id;
+	private String fname;
+	private double cgpa;
 
-	Player(String name, int score) {
-		this.name = name;
-		this.score = score;
+	public Student(int id, String fname, double cgpa) {
+		super();
+		this.id = id;
+		this.fname = fname;
+		this.cgpa = cgpa;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public double getCgpa() {
+		return cgpa;
 	}
 }
 
-class Solution {
+public class Solution {
 
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
+		Scanner in = new Scanner(System.in);
+		int testCases = Integer.parseInt(in.nextLine());
 
-		Player[] player = new Player[n];
-		Checker checker = new Checker();
+		List<Student> studentList = new ArrayList<Student>();
+		while (testCases > 0) {
+			int id = in.nextInt();
+			String fname = in.next();
+			double cgpa = in.nextDouble();
 
-		for (int i = 0; i < n; i++) {
-			player[i] = new Player(scan.next(), scan.nextInt());
+			Student st = new Student(id, fname, cgpa);
+			studentList.add(st);
+
+			testCases--;
 		}
-		scan.close();
 
-		Arrays.sort(player, checker);
-		for (int i = 0; i < player.length; i++) {
-			System.out.printf("%s %s\n", player[i].name, player[i].score);
+		compareStudante cs = new compareStudante();
+		Collections.sort(studentList, cs);
+		
+		for (Student st : studentList) {
+			System.out.println(st.getFname());
 		}
 	}
 }
