@@ -1,24 +1,85 @@
 package hackerrank;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.math.BigInteger;
+import java.security.Permission;
+import java.util.Scanner;
+
+interface Food {
+	public String getType();
+}
+
+class Pizza implements Food {
+	public String getType() {
+		return "Someone ordered a Fast Food!";
+	}
+}
+
+class Cake implements Food {
+
+	public String getType() {
+		return "Someone ordered a Dessert!";
+	}
+}
+
+class FoodFactory {
+	public Food getFood(String food) {
+		switch (food) {
+		case "cake":
+			return new Cake();
+		case "pizza":
+			return new Pizza();
+		default:
+			return new Food() {
+				@Override
+				public String getType() {
+					return null;
+				}
+			};
+		}
+	}
+}
 
 public class Solution {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        String n = bufferedReader.readLine();
-        
-        	BigInteger x = new BigInteger(n);
-        	
-        	if (x.isProbablePrime(100) == true) {
-        		System.out.println("prime");
-        	}else {
-        		System.out.println("not prime");
-        	}
-        	
-        	bufferedReader.close();
-    }
+	public static void main(String args[]) {
+		Do_Not_Terminate.forbidExit();
+
+		try {
+
+			Scanner sc = new Scanner(System.in);
+
+			FoodFactory foodFactory = new FoodFactory();
+
+			Food food = foodFactory.getFood(sc.nextLine());
+
+			System.out.println("The factory returned " + food.getClass());
+			System.out.println(food.getType());
+		} catch (Do_Not_Terminate.ExitTrappedException e) {
+			System.out.println("Unsuccessful Termination!!");
+		}
+	}
+
+}
+
+class Do_Not_Terminate {
+
+	public static class ExitTrappedException extends SecurityException {
+
+		private static final long serialVersionUID = 1L;
+	}
+
+	@SuppressWarnings("removal")
+	public static void forbidExit() {
+
+		@SuppressWarnings({ "removal", "deprecation" })
+		final SecurityManager securityManager = new SecurityManager() {
+
+			@Override
+			public void checkPermission(Permission permission) {
+				if (permission.getName().contains("exitVM")) {
+					throw new ExitTrappedException();
+				}
+			}
+		};
+		System.setSecurityManager(securityManager);
+	}
 }
